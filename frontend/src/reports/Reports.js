@@ -7,6 +7,8 @@ import { Button, } from '@material-ui/core';
 
 import ListReports from './ListReports';
 import SideBar from '../components/Sidebar';
+import DeleteReports from './DeleteReports';
+import UpdateReports from './UpdateReports';
 export default class Reports extends Component {
 
     constructor(props) {
@@ -28,6 +30,16 @@ export default class Reports extends Component {
             isList: true
         })
     }
+    delReps = async () => {
+        this.setState({
+            isdel: true
+        })
+    }
+    updateReps = async () => {
+        this.setState({
+            isUpdate: true
+        })
+    }
     render() {
         if (this.state.isCreate) {
             return (
@@ -37,24 +49,34 @@ export default class Reports extends Component {
             return (
                 <ListReports></ListReports>
             )
+        }
+        else if (this.state.isdel) {
+            return (
+                <DeleteReports></DeleteReports>
+            )
+        }
+        else if (this.state.isUpdate) {
+            return (
+                <UpdateReports></UpdateReports>
+            )
         } else {
             return (
                 <div>
-                <OpenMenu />
-                <div style={{
-                    display: "flex",
-                    flexDirection: 'row',
-                    alignItems: 'self-start',
-                    alignContent: 'center'
-                }}>
-                    <SideBar />
+                    <OpenMenu />
                     <div style={{
-                        margin: 50,
                         display: "flex",
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        alignContent: 'start'
+                        flexDirection: 'row',
+                        alignItems: 'self-start',
+                        alignContent: 'center'
                     }}>
+                        <SideBar />
+                        <div style={{
+                            margin: 50,
+                            display: "flex",
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            alignContent: 'start'
+                        }}>
                             <div style={{
                                 marginBottom: 10,
                             }}>
@@ -64,12 +86,32 @@ export default class Reports extends Component {
                                     width="true"
                                     onClick={this.creatReps}>Create New Reports</Button>
                             </div>
-                            <div >
+                            <div style={{
+                                marginBottom: 10,
+                            }} >
                                 <Button
                                     variant="contained"
                                     color="inherit"
                                     width="true"
                                     onClick={this.listReps}>List Reports</Button>
+                            </div>
+                            <div style={{
+                                marginBottom: 10,
+                            }}>
+                                <Button
+                                    variant="contained"
+                                    color="inherit"
+                                    width="true"
+                                    onClick={this.delReps}>Delete Reports</Button>
+                            </div>
+                            <div style={{
+                                marginBottom: 10,
+                            }}>
+                                <Button
+                                    variant="contained"
+                                    color="inherit"
+                                    width="true"
+                                    onClick={this.updateReps}>Update Reports</Button>
                             </div>
                         </div>
                     </div>

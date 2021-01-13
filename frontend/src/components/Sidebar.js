@@ -34,10 +34,10 @@ const SideBar = ({ activeSideBar, setActiveSideBar }) => {
                             <span>Reports</span>
                         </div>
                     </NavLink>
-                    <NavLink to="/statistic" activeClassName="selected">
+                    <NavLink to="/form" activeClassName="selected">
                         <div className="sidebar-item">
                             <MenuItem><EqualizerIcon/></MenuItem>
-                            <span>Statistic</span>
+                            <span>Form</span>
                         </div>
                     </NavLink>
 

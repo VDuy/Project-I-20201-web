@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Typography, Grid, ButtonBase } from '@material-ui/core';
 import api from '../API';
-
+import OpenMenu from '../components/OpenMenu'
+import SideBar from '../components/Sidebar';
 class ListAccounts extends React.Component {
     constructor(props) {
         super(props)
@@ -25,7 +26,7 @@ class ListAccounts extends React.Component {
             })
         }
     }
-   
+
     async componentDidMount() {
         await this.listaccount()
     }
@@ -33,50 +34,61 @@ class ListAccounts extends React.Component {
 
     render() {
         return (
-            <div style={{
-                display: "flex",
-                flex: "auto",
-                flexDirection: "column",
-                alignItems: 'center',
-                alignContent: 'center'
-            }}>
+            <div>
+                <OpenMenu />
                 <div style={{
-                    margin: 20,
                     display: "flex",
-                    flexDirection: 'column',
-                    alignItems: 'center',
+                    flexDirection: 'row',
+                    alignItems: 'self-start',
                     alignContent: 'center'
                 }}>
-                    <Typography variant="h4" gutterBottom>
-                        List Accounts
-            </Typography>
-                    <h2> Total Account: {this.state.listaccount.length}</h2>
-                </div>
-                <div>
-                    <Grid
-                        container
-                        direction="column"
-                        justify="space-evenly"
-                        alignItems="flex-start"
-                        spacing={5}
-                        style={{
-                            backgroundColor: 'lightblue'
+                    <SideBar />
+                    <div style={{
+                        display: "flex",
+                        flex: "auto",
+                        flexDirection: "column",
+                        alignItems: 'center',
+                        alignContent: 'center'
+                    }}>
+                        <div style={{
+                            margin: 20,
+                            display: "flex",
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            alignContent: 'center'
                         }}>
-                        {this.state.listaccount.map((st) => {
-                            return <Grid item>
-                                <ButtonBase
-                                    onClick={() => {
-                                        this.props.history.push(`/account/list/${st.username}`)
-                                    }}
-                                >
-                                    <Typography>
-                                        {st.username}
-                                    </Typography>
-                                </ButtonBase>
+                            <Typography variant="h4" gutterBottom>
+                                List Accounts
+            </Typography>
+                            <h2> Total Account: {this.state.listaccount.length}</h2>
+                        </div>
+                        <div>
+                            <Grid
+                                container
+                                direction="column"
+                                justify="space-evenly"
+                                alignItems="flex-start"
+                                spacing={5}
+                                style={{
+                                    backgroundColor: 'lightblue'
+                                }}>
+                                {this.state.listaccount.map((st) => {
+                                    return <Grid item>
+                                        <ButtonBase
+                                            onClick={() => {
+                                                this.props.history.push(`/account/list/${st.username}`)
+                                            }}
+                                        >
+                                            <Typography>
+                                                {st.username}
+                                            </Typography>
+                                        </ButtonBase>
+                                    </Grid>
+                                })}
                             </Grid>
-                        })}
-                    </Grid>
 
+                        </div>
+                    </div>
                 </div>
             </div>
         )

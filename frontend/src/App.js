@@ -9,13 +9,13 @@ import SignUp from './view/SignUp';
 //import Cookies from 'js-cookie'
 import Reports from './reports/Reports';
 import Accounts from './raccounts/Accounts';
-import Statistic from './statistic/Statistic';
+import Form from './form/Form';
 import ListAccounts from './raccounts/ListAccounts';
 import AccountInfo from './raccounts/AccountInfo';
 import ListReports from './reports/ListReports';
 import ReportsInfo from './reports/ReportsInfo';
-//import { Report } from '@material-ui/icons';
-// Routers
+import PDF from './view/PDF';
+
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -47,9 +47,9 @@ export default class App extends Component {
                     path: '/account',
                 },
                 {
-                    component: Statistic,
+                    component: Form,
                     layout: 'div',
-                    path: '/statistic',
+                    path: '/form',
                 },
                 {
                     component: ListAccounts,
@@ -70,6 +70,11 @@ export default class App extends Component {
                     component: ReportsInfo,
                     layout: 'div',
                     path: '/reports/list/:id',
+                },
+                 {
+                    component: PDF,
+                    layout: 'div',
+                    path: '/form/pdf',
                 },
 
 

@@ -10,38 +10,39 @@ import {
     Checkbox,
     IconButton,
 } from '@material-ui/core';
-import OpenMenu from '../components/OpenMenu'
+import OpenMenu from '../components/OpenMenu';
 import SideBar from '../components/Sidebar';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import api from '../API';
 
 
-class DeleteAccount extends React.Component {
+class DeleteReports extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            listaccount: [],
+            listreports: [],
             message: '',
         };
     }
 
-    deleteAccount = async (event) => {
-        const username = event.target.username
-        const req = await api.auth.deleteAccount(username)
+    deleteReports = async (event) => {
+        const id = event.target.id
+        const req = await api.auth.deleteReports(id)
         if (req.status === true) {
-            alert('xoa tai khoan thanh cong')
+            alert('xoa bao cao thanh cong')
             window.location = `/homepage`
         } else {
-            alert('xoa tai khoan that bai')
-            window.location = `/account`
+            alert('xoa bao cao that bai')
+            window.location = `/reports`
         }
     }
-    async listaccount() {
+    async listreports() {
 
-        const res = await api.auth.getAllAccount();
+        const res = await api.auth.getAllReports();
         if (res.status) {
             this.setState({
-                listaccount: res.data.data
+                listreports: res.data.data
             })
         } else {
             this.setState({
@@ -50,10 +51,10 @@ class DeleteAccount extends React.Component {
         }
     }
     async componentDidMount() {
-        await this.listaccount()
+        await this.listreports()
     }
     onClickDirect = (url) => {
-        window.location = `/account/${url}`
+        window.location = `/reports/${url}`
     }
     render() {
         return (
@@ -70,30 +71,31 @@ class DeleteAccount extends React.Component {
 
                         <List>
                             {
-                                this.state.listaccount.map(s => (
-                                    <ListItem button >
+                                this.state.listreports.map(s => (
+                                    <ListItem >
                                         <ListItemIcon>
                                             <Checkbox
                                                 edge="start" />
                                         </ListItemIcon>
-                                        <ListItemText id={s.username} primary={s.username}
+                                        <ListItemText id={s.id} primary={s.id}
                                             onClick={() => {
-                                                this.props.history.push(`/account/${s.username}`)
+                                                this.props.history.push(`/reports/${s.id}`)
                                             }} />
                                         <ListItemSecondaryAction >
                                             <IconButton edge="end">
                                                 <DeleteIcon
-                                                    pointerEvents id={s.username}
-                                                    onClick={this.deleteAccount} /></IconButton>
+                                                    pointerEvents id={s.id}
+                                                    onClick={this.deleteReports} /></IconButton>
                                         </ListItemSecondaryAction>
                                     </ListItem>
                                 ))
                             }
                         </List>
+
                     </div>
                 </div>
             </div>
         )
     }
 }
-export default DeleteAccount;
+export default DeleteReports;
