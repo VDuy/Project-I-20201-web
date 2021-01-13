@@ -27,7 +27,7 @@ class SignUp extends React.Component {
     }
     handleCreate = async () => {
         const res = await api.auth.createAccount(this.state);
-        if (res.status) {
+        if (res.status === true) {
             window.location = '/homepage'
         } else {
             window.location = '/account'

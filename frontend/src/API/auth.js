@@ -36,7 +36,7 @@ export const getAllAccount = async () => {
     };
   }
 }
-export const getAccountByUsername = async(username) => {
+export const getAccountByUsername = async (username) => {
   try {
     const res = await APIAuth.get(`/account/${username}`);
     return {
@@ -65,7 +65,7 @@ export const getAllReports = async () => {
     };
   }
 }
-export const getReportsById = async(id) => {
+export const getReportsById = async (id) => {
   try {
     const res = await APIAuth.get(`/reports/${id}`);
     return {
@@ -106,7 +106,7 @@ export const createReports = async (newReports) => {
   }
 }
 
-export const DeleteAccount = async (username) => {
+export const deleteAccount = async (username) => {
   try {
     await APIAuth.delete(`/account/${username}`)
     return {
@@ -119,9 +119,37 @@ export const DeleteAccount = async (username) => {
     }
   }
 }
-export const DeleteReports = async (id) => {
+export const deleteReports = async (id) => {
   try {
     await APIAuth.delete(`/reports${id}`);
+    return {
+
+      status: true
+    }
+  } catch (error) {
+    return {
+      message: error,
+      status: 0,
+    }
+  }
+}
+export const updateAccount = async (username) => {
+  try {
+    await APIAuth.put(`/account/${username}`);
+    return {
+
+      status: true
+    }
+  } catch (error) {
+    return {
+      message: error,
+      status: 0,
+    }
+  }
+}
+export const updateReports = async (id) => {
+  try {
+    await APIAuth.put(`/account${id}`);
     return {
 
       status: true

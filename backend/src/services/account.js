@@ -5,7 +5,7 @@ const createAccount = async (newAccount) => {
   const encryptedPassword = await security.generatePassword(newAccount.password);
   const sql =
     `INSERT INTO account ( username, password, phone, role) VALUE (?,?,?,?);`
-  const params = [newAccount.username, newAccount.password, newAccount.phone, newAccount.role ];
+  const params = [newAccount.username, newAccount.password, newAccount.phone, newAccount.role];
   await db.query(sql, params);
   return {
     status: 1,
@@ -32,7 +32,7 @@ const getAllAccount = async () => {
   };
 };
 
-const getAccountByUsername = async(username) => {
+const getAccountByUsername = async (username) => {
   const sql =
     `SELECT username, password, phone, role
    FROM account 
@@ -46,16 +46,15 @@ const getAccountByUsername = async(username) => {
 };
 
 const updateAccount = async (username, data) => {
-  const sql = `UPDATE account
-                  SET password = ?, 
-                  role = ?,
-                  phone = ?, 
-                  WHERE username = ?
-                  ;`;
+  const sql = ` UPDATE account
+                SET password = ?, phone = ?, role = ?
+                WHERE username = ? AND isDelete = 0; `;
 
   await db.query(sql, [
-    data.phone,
     username,
+    data.password,
+    data.phone,
+    data.role,
   ]);
   return {
     status: 1,
@@ -73,6 +72,7 @@ const deleteAccount = async (username) => {
     message: `Xoá thành công!`,
   };
 }
+
 module.exports = {
   getAllAccount,
   getAccountByUsername,

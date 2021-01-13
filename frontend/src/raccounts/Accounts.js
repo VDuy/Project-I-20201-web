@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 //import { deleteAccount } from '../../../backend/src/services/account';
 
 import api from '../API/api';
-import { DeleteAccount } from '../API/auth';
+
 import OpenMenu from '../components/OpenMenu';
 import SideBar from '../components/Sidebar';
 import CreateNewAccount from './CreateNewAccount';
 import ListAccounts from './ListAccounts';
 import DeleteAccounts from './DeleteAccounts';
+import UpdateAccount from './UpdateAccount';
 
 
 
@@ -36,6 +37,11 @@ export default class Accounts extends React.Component {
             isDel: true
         })
     }
+    update = async () => {
+        this.setState({
+            isUpdate: true
+        })
+    }
 
     render() {
         if (this.state.isCreate) {
@@ -50,6 +56,10 @@ export default class Accounts extends React.Component {
         } else if (this.state.isDel) {
             return (
                 <DeleteAccounts></DeleteAccounts>
+            )
+        } else if (this.state.isUpdate) {
+            return (
+                <UpdateAccount></UpdateAccount>
             )
         } else {
             return (
@@ -94,7 +104,16 @@ export default class Accounts extends React.Component {
                                     variant="contained"
                                     color="inherit"
                                     width="true"
-                                    onClick={this.del}>Delete Account</Button></div>
+                                    onClick={this.del}>Delete Account</Button>
+                            </div>
+                            <div style={{
+                                margin: 10,
+                            }}>
+                                <Button
+                                    variant="contained"
+                                    color="inherit"
+                                    width="true"
+                                    onClick={this.update}>Update Account</Button></div>
                         </div>
                     </div>
                 </div >

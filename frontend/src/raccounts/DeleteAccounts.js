@@ -26,13 +26,13 @@ class DeleteAccount extends React.Component {
 
     deleteAccount = async (event) => {
         const username = event.target.username
-        const req = await api.auth.DeleteAccount(username)
-        if (req.status) {
+        const req = await api.auth.deleteAccount(username)
+        if (req.status === true) {
             alert('xoa tai khoan thanh cong')
-            window.location = `/`
+            window.location = `/homepage`
         } else {
             alert('xoa tai khoan that bai')
-            window.location = `/`
+            window.location = `/account`
         }
     }
     async listaccount() {

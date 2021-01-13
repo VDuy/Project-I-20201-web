@@ -49,7 +49,8 @@ const updateAccount = async (req, res) => {
   const { username } = req.params;
   await accountService.updateAccount(username, req.body)
   res.send({
-    status: 1,// true - 1, false 0
+    message: "updated",
+    status: 1,
   })
 }
 const deleteAccount = async (req, res) => {
