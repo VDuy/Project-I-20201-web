@@ -77,16 +77,21 @@ class DeleteReports extends React.Component {
                                             <Checkbox
                                                 edge="start" />
                                         </ListItemIcon>
+
                                         <ListItemText id={s.id} primary={s.id}
                                             onClick={() => {
                                                 this.props.history.push(`/reports/${s.id}`)
-                                            }} />
+                                            }}>
+                                        </ListItemText>
+
                                         <ListItemSecondaryAction >
                                             <IconButton edge="end">
                                                 <DeleteIcon
                                                     pointerEvents id={s.id}
-                                                    onClick={this.deleteReports} /></IconButton>
+                                                    onClick={this.deleteReports} />
+                                            </IconButton>
                                         </ListItemSecondaryAction>
+
                                     </ListItem>
                                 ))
                             }

@@ -14,13 +14,21 @@ import OpenMenu from '../components/OpenMenu'
 import SideBar from '../components/Sidebar';
 import DeleteIcon from '@material-ui/icons/Delete';
 import api from '../API';
+import PropTypes from 'prop-types'
+//import AccountInfo from './AccountInfo'
 
 
 class DeleteAccount extends React.Component {
+    // static propTypes = {
+    //     match: PropTypes.object.isRequired,
+    //     location: PropTypes.object.isRequired,
+    //     history: PropTypes.object.isRequired
+    // };
     constructor(props) {
         super(props)
         this.state = {
-            listaccount: [],
+            // listaccount: [],
+            account: [],
             message: '',
         };
     }
@@ -36,12 +44,24 @@ class DeleteAccount extends React.Component {
             window.location = `/account`
         }
     }
-    async listaccount() {
-
-        const res = await api.auth.getAllAccount();
+    // async listaccount() {
+    //     const res = await api.auth.getAllAccount();
+    //     if (res.status) {
+    //         this.setState({
+    //             listaccount: res.data.data
+    //         })
+    //     } else {
+    //         this.setState({
+    //             message: res.message
+    //         })
+    //     }
+    // }
+    async getaccount() {
+        const { match: { params } } = this.props;
+        const res = await api.auth.getAccountByUsername(params.username);
         if (res.status) {
             this.setState({
-                listaccount: res.data.data
+                account: res.data.data
             })
         } else {
             this.setState({
@@ -50,7 +70,8 @@ class DeleteAccount extends React.Component {
         }
     }
     async componentDidMount() {
-        await this.listaccount()
+        //await this.listaccount();
+        await this.getaccount();
     }
     onClickDirect = (url) => {
         window.location = `/account/${url}`
@@ -70,15 +91,17 @@ class DeleteAccount extends React.Component {
 
                         <List>
                             {
-                                this.state.listaccount.map(s => (
+                                this.state.account.map(s => (
                                     <ListItem button >
                                         <ListItemIcon>
                                             <Checkbox
-                                                edge="start" />
+                                                edge="start"
+
+                                            />
                                         </ListItemIcon>
                                         <ListItemText id={s.username} primary={s.username}
                                             onClick={() => {
-                                                this.props.history.push(`/account/${s.username}`)
+                                                this.props.history.push(`/account/list/${s.username}`)
                                             }} />
                                         <ListItemSecondaryAction >
                                             <IconButton edge="end">
